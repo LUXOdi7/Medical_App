@@ -16,6 +16,7 @@ public class DatosClinica {
     //Lista para gestionar las citas médicas
     public static ArrayList<Cita> listaCita = new ArrayList<>();
 
+    //APURATE PS HIJITO
     public static void cargarDatosInicialesEspecialidad() {
         if (listaEspecialidades.isEmpty()) {
             listaEspecialidades.add(
