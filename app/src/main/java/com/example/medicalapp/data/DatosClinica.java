@@ -15,6 +15,7 @@ public class DatosClinica {
     public static ArrayList<Medico> listaMedicos = new ArrayList<>();
     //Lista para gestionar las citas médicas
     public static ArrayList<Cita> listaCita = new ArrayList<>();
+    //GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
     public static void cargarDatosInicialesEspecialidad() {
         if (listaEspecialidades.isEmpty()) {
