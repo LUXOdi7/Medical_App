@@ -1,7 +1,7 @@
 package com.example.medicalapp.data;
 
 import com.example.medicalapp.model.Cita;
-import com.example.medicalapp.model.Especialidad;
+import com.example.medicalapp.model.EspecialidadOLD;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import com.example.medicalapp.model.Medico;
 
 public class DatosClinica {
     //Lista para gestionar las especialidades médicas
-    public static ArrayList<Especialidad> listaEspecialidades = new ArrayList<>();
+    public static ArrayList<EspecialidadOLD> listaEspecialidades = new ArrayList<>();
     //Lista para gestionar los médicos
     public static ArrayList<Medico> listaMedicos = new ArrayList<>();
     //Lista para gestionar las citas médicas
@@ -20,19 +20,19 @@ public class DatosClinica {
     public static void cargarDatosInicialesEspecialidad() {
         if (listaEspecialidades.isEmpty()) {
             listaEspecialidades.add(
-                    new Especialidad(
+                    new EspecialidadOLD(
                             "Pediatria",
                             "Atención médica especializada para niños y adolescentes",
                             R.drawable.pediatria)
             );
             listaEspecialidades.add(
-                    new Especialidad(
+                    new EspecialidadOLD(
                             "Cardiologia",
                             "Diagnóstico y trantamiento de enfermedades del corazón",
                             R.drawable.cardiologia)
             );
             listaEspecialidades.add(
-                    new Especialidad(
+                    new EspecialidadOLD(
                             "Odontologia",
                             "Atención integral en tratamientos y enfermedades bucales",
                             R.drawable.odontologia)

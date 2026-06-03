@@ -2,7 +2,7 @@ package com.example.medicalapp.model;
 
 import androidx.annotation.NonNull;
 
-public class Especialidad {
+public class EspecialidadOLD {
     private String nombre;
     private String descripcion;
     private int imagen;
@@ -11,7 +11,7 @@ public class Especialidad {
         return nombre;
     }
 
-    public Especialidad(String nombre, String descripcion, int imagen) {
+    public EspecialidadOLD(String nombre, String descripcion, int imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;

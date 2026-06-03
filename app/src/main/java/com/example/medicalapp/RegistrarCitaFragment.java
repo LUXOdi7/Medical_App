@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 
 import com.example.medicalapp.databinding.FragmentRegistrarCitaBinding;
 import com.example.medicalapp.data.DatosClinica;
-import com.example.medicalapp.model.Especialidad;
+import com.example.medicalapp.model.EspecialidadOLD;
 import com.example.medicalapp.model.Medico;
 
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class RegistrarCitaFragment extends Fragment {
 
 
     private void cargarEspecialidades() {
-        ArrayAdapter<Especialidad> adapter = new ArrayAdapter<>(
+        ArrayAdapter<EspecialidadOLD> adapter = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_dropdown_item_1line,
                 DatosClinica.listaEspecialidades

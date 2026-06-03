@@ -11,11 +11,11 @@ import com.example.medicalapp.model.Medico;
 
 import java.util.ArrayList;
 
-public class MedicoAdaptador extends RecyclerView.Adapter<MedicoAdaptador.MedicoViewHolder> {
+public class MedicoAdapter extends RecyclerView.Adapter<MedicoAdapter.MedicoViewHolder> {
 
     private ArrayList<Medico> listaMedicos;
 
-    public MedicoAdaptador(ArrayList<Medico> listaMedicos) {
+    public MedicoAdapter(ArrayList<Medico> listaMedicos) {
         this.listaMedicos = listaMedicos;
     }
 

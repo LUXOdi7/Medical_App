@@ -6,19 +6,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.medicalapp.data.Especialidad;
 import com.example.medicalapp.databinding.ItemEspecialidadBinding;
-import com.example.medicalapp.model.Especialidad;
+import com.example.medicalapp.model.EspecialidadOLD;
 
 import java.util.ArrayList;
 
-public class EspecialidadAdaptador extends RecyclerView.Adapter<EspecialidadAdaptador.ViewHolder>{
+public class EspecialidadAdapter extends RecyclerView.Adapter<EspecialidadAdapter.ViewHolder>{
     private ArrayList<Especialidad> listaEspecialidad;
 
-    public EspecialidadAdaptador(ArrayList<Especialidad> listaEspecialidad){
+    public EspecialidadAdapter(ArrayList<Especialidad> listaEspecialidad){
         this.listaEspecialidad = listaEspecialidad;
     }
 
-    public void actualizarListaEspecialidad(ArrayList<Especialidad>listaEspecialidad){
+    public void actualizarListaEspecialidad(ArrayList<Especialidad> listaEspecialidad){
         this.listaEspecialidad = listaEspecialidad;
         //Con la finalidad de que el RecyclerView se refresque, aplicamos notifyDataSetChanged()
         notifyDataSetChanged();
@@ -59,10 +60,10 @@ public class EspecialidadAdaptador extends RecyclerView.Adapter<EspecialidadAdap
             this.binding = binding;
         }
 
-        public void mostrarDatos(Especialidad especialidad) {
-            binding.imgEspecialidad.setImageResource(especialidad.getImagen());
-            binding.txtEspecialidad.setText(especialidad.getNombre());
-            binding.txtDescripcionEspecialidad.setText(especialidad.getDescripcion());
+        public void mostrarDatos(EspecialidadOLD especialidadOLD) {
+            binding.imgEspecialidad.setImageResource(especialidadOLD.getImagen());
+            binding.txtEspecialidad.setText(especialidadOLD.getNombre());
+            binding.txtDescripcionEspecialidad.setText(especialidadOLD.getDescripcion());
         }
     }
 

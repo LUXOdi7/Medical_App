@@ -21,7 +21,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selecciona una especialidad para visualizar los médicos asociados."
+        android:text="Selecciona una especialidadOLD para visualizar los médicos asociados."
         android:textSize="14sp"
         android:layout_marginBottom="16dp" />
 

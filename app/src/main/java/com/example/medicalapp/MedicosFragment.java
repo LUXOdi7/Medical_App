@@ -12,10 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.example.medicalapp.adapter.MedicoAdaptador;
+import com.example.medicalapp.adapter.MedicoAdapter;
 import com.example.medicalapp.databinding.FragmentMedicosBinding;
 import com.example.medicalapp.data.DatosClinica;
-import com.example.medicalapp.model.Especialidad;
+import com.example.medicalapp.model.EspecialidadOLD;
 import com.example.medicalapp.model.Medico;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class MedicosFragment extends Fragment {
 
     FragmentMedicosBinding binding;
     ArrayList<Medico> listaMedicos;
-    MedicoAdaptador medicoAdaptador;
+    MedicoAdapter medicoAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,13 +48,13 @@ public class MedicosFragment extends Fragment {
         listaMedicos = new ArrayList<>();
 
         //Instanciar el adaptador
-        medicoAdaptador = new MedicoAdaptador(listaMedicos);
+        medicoAdapter = new MedicoAdapter(listaMedicos);
 
         //COnfigurar el recyclerView
         binding.rvMedicos.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         //Asignar el adaptador al recyclerView
-        binding.rvMedicos.setAdapter(medicoAdaptador);
+        binding.rvMedicos.setAdapter(medicoAdapter);
 
         //Al seleccionar un item (especialidad) del AutoCompleteText se debe mostrar los médicos pertenecientes a dicha especialidad
         binding.actvEspecialidad.setOnItemClickListener((parent, view1, position, id) -> {
@@ -77,12 +77,12 @@ public class MedicosFragment extends Fragment {
         //Obtener los medicos que pertenecen a la especialidad seleccionada
         listaMedicos = DatosClinica.obtenerListaMedicosPorEspecialidad(especialidadSeleccionada);
         //Enviar al adaptador a la lista de mpedicos de la especialidad seleccionada
-        medicoAdaptador.actualizarLista(listaMedicos);
+        medicoAdapter.actualizarLista(listaMedicos);
 
     }
 
     private void cargarEspecialidades() {
-        ArrayAdapter<Especialidad> adapter = new ArrayAdapter<>(
+        ArrayAdapter<EspecialidadOLD> adapter = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_dropdown_item_1line,
                 DatosClinica.listaEspecialidades

@@ -11,18 +11,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.medicalapp.adapter.EspecialidadAdaptador;
+import com.example.medicalapp.adapter.EspecialidadAdapter;
+import com.example.medicalapp.data.Especialidad;
 import com.example.medicalapp.databinding.FragmentEspecialidadesBinding;
 import com.example.medicalapp.data.DatosClinica;
-import com.example.medicalapp.model.Especialidad;
+import com.example.medicalapp.model.EspecialidadOLD;
+import com.example.medicalapp.response.EspecialidadListadoResponse;
+import com.example.medicalapp.retrofit.ApiService;
+import com.example.medicalapp.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EspecialidadesFragment extends Fragment {
 
     FragmentEspecialidadesBinding binding;
     ArrayList<Especialidad> listaEspecialidades;
-    EspecialidadAdaptador especialidadAdaptador;
+    EspecialidadAdapter especialidadAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,17 +46,36 @@ public class EspecialidadesFragment extends Fragment {
         //Cargar las especialidades almacenadas en el array
         DatosClinica.cargarDatosInicialesEspecialidad();
 
-        listaEspecialidades = DatosClinica.listaEspecialidades;
-        especialidadAdaptador = new EspecialidadAdaptador(listaEspecialidades);
+        especialidadAdapter = new EspecialidadAdapter(listaEspecialidades);
 
         //Configurar el RecyclerView
         binding.rvEspecialidades.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         //Asignar el adaptador al RecyclerView
-        binding.rvEspecialidades.setAdapter(especialidadAdaptador);
+        binding.rvEspecialidades.setAdapter(especialidadAdapter);
 
+        //Leer las especialidades del API REST
+        leerEspecialidades();
 
     }
+
+    private void leerEspecialidades() {
+        ApiService apiService = RetrofitClient.createService();
+        Call<EspecialidadListadoResponse> call= apiService.getEspecialidades();
+        call.enqueue(new Callback<EspecialidadListadoResponse>() {
+            @Override
+            public void onResponse(Call<EspecialidadListadoResponse> call, Response<EspecialidadListadoResponse> response) {
+                if (response.isSuccessful()){
+                    //Limpiar las especialidades cargadas en el ArrayList
+                    listaEspecialidades.clear();
+                    //Cargar las especialidades que vienen del API REST
+                    listaEspecialidades.addAll(Arrays.asList(response.body().getData()));
+                }
+
+        }
+    }
+
+
 
     @Override
     public void onDestroyView() {
