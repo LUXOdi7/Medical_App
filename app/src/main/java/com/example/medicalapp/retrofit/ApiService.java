@@ -2,6 +2,7 @@ package com.example.medicalapp.retrofit;
 
 
 import com.example.medicalapp.request.LoginRequest;
+import com.example.medicalapp.response.EspecialidadListadoResponse;
 import com.example.medicalapp.response.LoginResponse;
 
 import okhttp3.ResponseBody;
@@ -20,6 +21,10 @@ public interface ApiService {
 
     @GET("usuarios/foto/{id}")
     Call<ResponseBody> obtenerFotoUsuario(@Path("id") int id);
+    @GET("especialidades")
+    Call<EspecialidadListadoResponse> getEspecialidades();
+
+
 //    @GET("agricultor/foto/{id}")
 //    Call<ResponseBody> getFotoAgricultor(@Path("id") int id);
 //
