@@ -100,7 +100,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/txtEmail"
-                            android:text="huilder84@gmail.com"
+                            android:text="luisbarboza0503@gmail.com"
                             android:inputType="textEmailAddress"/>
                     </com.google.android.material.textfield.TextInputLayout>
 

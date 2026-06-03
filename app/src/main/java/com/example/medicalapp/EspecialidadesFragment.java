@@ -30,7 +30,7 @@ import retrofit2.Response;
 public class EspecialidadesFragment extends Fragment {
 
     FragmentEspecialidadesBinding binding;
-    ArrayList<Especialidad> listaEspecialidades;
+    ArrayList<Especialidad> listaEspecialidades = new ArrayList<>();
     EspecialidadAdapter especialidadAdapter;
 
     @Override
@@ -65,14 +65,21 @@ public class EspecialidadesFragment extends Fragment {
         call.enqueue(new Callback<EspecialidadListadoResponse>() {
             @Override
             public void onResponse(Call<EspecialidadListadoResponse> call, Response<EspecialidadListadoResponse> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     //Limpiar las especialidades cargadas en el ArrayList
                     listaEspecialidades.clear();
                     //Cargar las especialidades que vienen del API REST
                     listaEspecialidades.addAll(Arrays.asList(response.body().getData()));
+                    //Refrescar el listado del adapter
+                    especialidadAdapter.actualizarListaEspecialidad(listaEspecialidades);
                 }
+            }
+            @Override
+            public void onFailure(Call<EspecialidadListadoResponse> call, Throwable t) {
+                //Manejar el error
 
-        }
+            }
+        });
     }
 
 

@@ -42,7 +42,7 @@ public class EspecialidadAdapter extends RecyclerView.Adapter<EspecialidadAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Permite gestionar la impresión de los datos en la plantilla
         Especialidad especialidad = listaEspecialidad.get(position);
-        holder.mostrarDatos(especialidad);
+        //holder.mostrarDatos(especialidad);
     }
 
     @Override
