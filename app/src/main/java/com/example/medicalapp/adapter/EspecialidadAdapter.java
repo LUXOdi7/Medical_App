@@ -12,7 +12,7 @@ import com.example.medicalapp.databinding.ItemEspecialidadBinding;
 import java.util.ArrayList;
 
 public class EspecialidadAdapter extends RecyclerView.Adapter<EspecialidadAdapter.ViewHolder>{
-    private ArrayList<Especialidad> listaEspecialidad;
+    private ArrayList<Especialidad> listaEspecialidad = new ArrayList<>();
 
     public EspecialidadAdapter(ArrayList<Especialidad> listaEspecialidad){
         this.listaEspecialidad = listaEspecialidad;
