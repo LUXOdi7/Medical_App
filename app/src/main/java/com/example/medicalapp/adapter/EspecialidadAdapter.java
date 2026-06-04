@@ -1,5 +1,6 @@
 package com.example.medicalapp.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -63,6 +64,8 @@ public class EspecialidadAdapter extends RecyclerView.Adapter<EspecialidadAdapte
             //binding.imgEspecialidad.setImageResource(especialidad.getImagen());
             binding.txtEspecialidad.setText(especialidad.getNombre());
             binding.txtDescripcionEspecialidad.setText(especialidad.getDescripcion());
+
+            Log.e("ESP IMAGE", especialidad.getImagenUrl());
         }
     }
 

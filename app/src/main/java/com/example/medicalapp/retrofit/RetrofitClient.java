@@ -10,9 +10,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    //public static final String URL_API_SERVICE = "http://144.217.6.213:3014/api/";
+    public static final String URL_API_SERVICE = "http://144.217.6.213:3014/api/";
     //URL VPS_LUXO
-    public static final String URL_API_SERVICE = "http://204.12.203.112:10046/api/";
+    //public static final String URL_API_SERVICE = "http://204.12.203.112:10046/api/";
     public static String API_TOKEN;
 
     private static Retrofit retrofit = null;
