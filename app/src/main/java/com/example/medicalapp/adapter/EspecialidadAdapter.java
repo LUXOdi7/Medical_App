@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medicalapp.data.Especialidad;
 import com.example.medicalapp.databinding.ItemEspecialidadBinding;
-import com.example.medicalapp.model.EspecialidadOLD;
 
 import java.util.ArrayList;
 
@@ -42,7 +41,7 @@ public class EspecialidadAdapter extends RecyclerView.Adapter<EspecialidadAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Permite gestionar la impresión de los datos en la plantilla
         Especialidad especialidad = listaEspecialidad.get(position);
-        //holder.mostrarDatos(especialidad);
+        holder.mostrarDatos(especialidad);
     }
 
     @Override
@@ -60,10 +59,10 @@ public class EspecialidadAdapter extends RecyclerView.Adapter<EspecialidadAdapte
             this.binding = binding;
         }
 
-        public void mostrarDatos(EspecialidadOLD especialidadOLD) {
-            binding.imgEspecialidad.setImageResource(especialidadOLD.getImagen());
-            binding.txtEspecialidad.setText(especialidadOLD.getNombre());
-            binding.txtDescripcionEspecialidad.setText(especialidadOLD.getDescripcion());
+        public void mostrarDatos(Especialidad especialidad) {
+            //binding.imgEspecialidad.setImageResource(especialidad.getImagen());
+            binding.txtEspecialidad.setText(especialidad.getNombre());
+            binding.txtDescripcionEspecialidad.setText(especialidad.getDescripcion());
         }
     }
 
