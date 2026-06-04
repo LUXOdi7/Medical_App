@@ -56,6 +56,8 @@ dependencies {
     //Librerias Retrofit
     implementation libs.retrofit
     implementation libs.converter.gson
+    //Glide
+    implementation libs.glide
 
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit

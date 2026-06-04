@@ -7,8 +7,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.medicalapp.data.Especialidad;
 import com.example.medicalapp.databinding.ItemEspecialidadBinding;
+import com.example.medicalapp.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 
@@ -66,6 +70,16 @@ public class EspecialidadAdapter extends RecyclerView.Adapter<EspecialidadAdapte
             binding.txtDescripcionEspecialidad.setText(especialidad.getDescripcion());
 
             Log.e("ESP IMAGE", especialidad.getImagenUrl());
+
+            GlideUrl glideUrl = new GlideUrl(
+                    RetrofitClient.URL_API_SERVICE + especialidad.getImagenUrl(),
+                    new LazyHeaders.Builder()
+                            .addHeader("Authorization", "Bearer " + RetrofitClient.API_TOKEN)
+                            .build()
+            );
+            Glide.with(binding.getRoot().getContext())
+                    .load(glideUrl)
+                    .into(binding.imgEspecialidad);
         }
     }
 
