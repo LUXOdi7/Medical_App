@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:textSize="18sp"
-                android:text="Bienvenido al sustema de citas médicas"/>
+                android:text="Bienvenido al sistema de citas médicas"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"

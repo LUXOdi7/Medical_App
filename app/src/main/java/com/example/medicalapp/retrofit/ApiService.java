@@ -1,8 +1,10 @@
 package com.example.medicalapp.retrofit;
 
 
+import com.example.medicalapp.request.EspecialidadRegistrarRequest;
 import com.example.medicalapp.request.LoginRequest;
 import com.example.medicalapp.response.EspecialidadListadoResponse;
+import com.example.medicalapp.response.EspecialidadRegistrarResponse;
 import com.example.medicalapp.response.LoginResponse;
 
 import okhttp3.ResponseBody;
@@ -23,6 +25,8 @@ public interface ApiService {
     Call<ResponseBody> obtenerFotoUsuario(@Path("id") int id);
     @GET("especialidades")
     Call<EspecialidadListadoResponse> getEspecialidades();
+    @POST("especialidades")
+    Call<EspecialidadRegistrarResponse> registrarEspecialidad(@Body EspecialidadRegistrarRequest request);
 
 
 //    @GET("agricultor/foto/{id}")
