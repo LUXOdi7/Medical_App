@@ -19,6 +19,7 @@ import com.example.medicalapp.model.EspecialidadOLD;
 import com.example.medicalapp.response.EspecialidadListadoResponse;
 import com.example.medicalapp.retrofit.ApiService;
 import com.example.medicalapp.retrofit.RetrofitClient;
+import com.example.medicalapp.data.Login;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +54,17 @@ public class EspecialidadesFragment extends Fragment {
 
         //Asignar el adaptador al RecyclerView
         binding.rvEspecialidades.setAdapter(especialidadAdapter);
+
+        String rol = Login.DATOS_SESION.getRol();
+
+        if (!"ADMINISTRATIVO".equals(rol)) {
+            binding.fabAgregarEspecialidad.setVisibility(View.GONE);
+        } else {
+            binding.fabAgregarEspecialidad.setOnClickListener(v -> {
+                AgregarEspecialidadDialog dialog = new AgregarEspecialidadDialog();
+                dialog.show(getParentFragmentManager(), "AgregarViajeDialog");
+            });
+        }
 
         //Leer las especialidades del API REST
         leerEspecialidades();
