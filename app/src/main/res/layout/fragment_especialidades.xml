@@ -27,7 +27,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
         android:contentDescription="Registrar nueva especialidad"
-        android:src="@drawable/add_24px"
+        android:src="@drawable/add_2_24px"
         app:backgroundTint="@color/light_cyan"
         app:tint="@android:color/holo_red_light"
         app:borderWidth="0dp"
