@@ -17,7 +17,7 @@ import com.example.medicalapp.retrofit.RetrofitClient;
 import java.util.ArrayList;
 
 public class EspecialidadAdapter extends RecyclerView.Adapter<EspecialidadAdapter.ViewHolder>{
-    private ArrayList<Especialidad> listaEspecialidad = new ArrayList<>();
+    private ArrayList<Especialidad> listaEspecialidad;
 
     public EspecialidadAdapter(ArrayList<Especialidad> listaEspecialidad){
         this.listaEspecialidad = listaEspecialidad;

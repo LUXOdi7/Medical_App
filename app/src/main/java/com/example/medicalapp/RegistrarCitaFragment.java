@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import com.example.medicalapp.databinding.FragmentRegistrarCitaBinding;
 import com.example.medicalapp.data.DatosClinica;
 import com.example.medicalapp.model.EspecialidadOLD;
-import com.example.medicalapp.model.Medico;
 
 import java.util.ArrayList;
 

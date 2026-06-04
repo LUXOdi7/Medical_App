@@ -1,13 +1,18 @@
 package com.example.medicalapp.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
+import com.example.medicalapp.data.Medico;
 import com.example.medicalapp.databinding.ItemMedicoBinding;
-import com.example.medicalapp.model.Medico;
+import com.example.medicalapp.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 
@@ -56,11 +61,26 @@ public class MedicoAdapter extends RecyclerView.Adapter<MedicoAdapter.MedicoView
         }
 
         public void mostrarDatos(Medico medico){
-            binding.tvNombreMedico.setText(medico.getNombre());
-            binding.tvEspecialidadMedico.setText("Especialidad: " + medico.getEspecialidad());
-            binding.tvHorarioMedico.setText("Horario: " + medico.getHorario());
-            binding.tvConsultorioMedico.setText("Consultorio: " + medico.getConsultorio());
-            binding.imgMedico.setImageResource(medico.getImagen());
+            binding.tvNombreMedico.setText(medico.getNombres());
+            binding.tvApellidosMedico.setText(medico.getApellidos());
+            binding.tvDniMedico.setText("DNI: " + medico.getDni());
+            binding.tvCmpMedico.setText("CMP: " + medico.getCmp());
+            binding.tvTelefonoMedico.setText("Teléfono: " + medico.getTelefono());
+            binding.tvEstadoMedico.setText("Estado: " + medico.getEstadoMedicoId());
+
+            Log.e("ESP IMAGE", medico.getImagenUrl());
+
+            GlideUrl glideUrl = new GlideUrl(
+                    RetrofitClient.URL_API_SERVICE + medico.getImagenUrl(),
+                    new LazyHeaders.Builder()
+                            .addHeader("Authorization", "Bearer " + RetrofitClient.API_TOKEN)
+                            .build()
+            );
+            Glide.with(binding.getRoot().getContext())
+                    .load(glideUrl)
+                    .into(binding.imgMedico);
+
+
         }
 
     }

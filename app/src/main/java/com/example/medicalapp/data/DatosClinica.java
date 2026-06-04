@@ -6,7 +6,6 @@ import com.example.medicalapp.model.EspecialidadOLD;
 import java.util.ArrayList;
 
 import com.example.medicalapp.R;
-import com.example.medicalapp.model.Medico;
 
 public class DatosClinica {
     //Lista para gestionar las especialidades médicas

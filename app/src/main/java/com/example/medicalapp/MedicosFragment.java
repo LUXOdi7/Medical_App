@@ -16,14 +16,13 @@ import com.example.medicalapp.adapter.MedicoAdapter;
 import com.example.medicalapp.databinding.FragmentMedicosBinding;
 import com.example.medicalapp.data.DatosClinica;
 import com.example.medicalapp.model.EspecialidadOLD;
-import com.example.medicalapp.model.Medico;
 
 import java.util.ArrayList;
 
 public class MedicosFragment extends Fragment {
 
     FragmentMedicosBinding binding;
-    ArrayList<Medico> listaMedicos;
+    ArrayList<Medico> listaMedicos = new ArrayList<>();
     MedicoAdapter medicoAdapter;
 
     @Override
