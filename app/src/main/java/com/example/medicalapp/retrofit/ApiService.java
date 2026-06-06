@@ -3,9 +3,12 @@ package com.example.medicalapp.retrofit;
 
 import com.example.medicalapp.request.EspecialidadRegistrarRequest;
 import com.example.medicalapp.request.LoginRequest;
+import com.example.medicalapp.request.MedicoRegistrarRequest;
 import com.example.medicalapp.response.EspecialidadListadoResponse;
 import com.example.medicalapp.response.EspecialidadRegistrarResponse;
 import com.example.medicalapp.response.LoginResponse;
+import com.example.medicalapp.response.MedicoPorEspecialidadListadoResponse;
+import com.example.medicalapp.response.MedicoRegistrarResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -28,6 +31,11 @@ public interface ApiService {
     @POST("especialidades")
     Call<EspecialidadRegistrarResponse> registrarEspecialidad(@Body EspecialidadRegistrarRequest request);
 
+    @GET("medicos/especialidad/{id}")
+    Call<MedicoPorEspecialidadListadoResponse> getMedicosPorEspecialidad(@Path("id") int id);
+
+    @POST("medicos/")
+    Call<MedicoRegistrarResponse> registrarMedico(@Body MedicoRegistrarRequest request);
 
 //    @GET("agricultor/foto/{id}")
 //    Call<ResponseBody> getFotoAgricultor(@Path("id") int id);

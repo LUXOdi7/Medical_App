@@ -17,7 +17,9 @@ import com.example.medicalapp.retrofit.RetrofitClient;
 import java.util.ArrayList;
 
 public class EspecialidadAdapter extends RecyclerView.Adapter<EspecialidadAdapter.ViewHolder>{
-    private ArrayList<Especialidad> listaEspecialidad;
+    private ArrayList<Especialidad> listaEspecialidad = new ArrayList<>();
+
+    private String rolUsuario;
 
     public EspecialidadAdapter(ArrayList<Especialidad> listaEspecialidad){
         this.listaEspecialidad = listaEspecialidad;
@@ -69,7 +71,7 @@ public class EspecialidadAdapter extends RecyclerView.Adapter<EspecialidadAdapte
             binding.txtEspecialidad.setText(especialidad.getNombre());
             binding.txtDescripcionEspecialidad.setText(especialidad.getDescripcion());
 
-            Log.e("ESP IMAGE", especialidad.getImagenUrl());
+            Log.e("ESP IMAGE", RetrofitClient.URL_API_SERVICE+especialidad.getImagenUrl());
 
             GlideUrl glideUrl = new GlideUrl(
                     RetrofitClient.URL_API_SERVICE + especialidad.getImagenUrl(),

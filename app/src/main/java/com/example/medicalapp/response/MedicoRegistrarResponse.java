@@ -1,34 +1,16 @@
 package com.example.medicalapp.response;
 
 public class MedicoRegistrarResponse {
-    private String email;
-    private int medicoId;
-    private int usuarioId;
+    private int medico_id;
     private String message;
-    private boolean status;
+    private Boolean status;
 
-    public String getEmail() {
-        return email;
+    public int getEspecialidad_id() {
+        return medico_id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getMedicoId() {
-        return medicoId;
-    }
-
-    public void setMedicoId(int medicoId) {
-        this.medicoId = medicoId;
-    }
-
-    public int getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setEspecialidad_id(int especialidad_id) {
+        this.medico_id = especialidad_id;
     }
 
     public String getMessage() {
@@ -39,11 +21,11 @@ public class MedicoRegistrarResponse {
         this.message = message;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 }

@@ -2,6 +2,7 @@ package com.example.medicalapp.adapter;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -19,9 +20,10 @@ import java.util.ArrayList;
 public class MedicoAdapter extends RecyclerView.Adapter<MedicoAdapter.MedicoViewHolder> {
 
     private ArrayList<Medico> listaMedicos;
-
-    public MedicoAdapter(ArrayList<Medico> listaMedicos) {
+    private String rolUsuario;
+    public MedicoAdapter(ArrayList<Medico> listaMedicos, String rolUsuario) {
         this.listaMedicos = listaMedicos;
+        this.rolUsuario = rolUsuario;
     }
 
     @NonNull
@@ -43,7 +45,7 @@ public class MedicoAdapter extends RecyclerView.Adapter<MedicoAdapter.MedicoView
     @Override
     public void onBindViewHolder(@NonNull MedicoViewHolder holder, int position) {
         Medico medico = listaMedicos.get(position);
-        holder.mostrarDatos(medico);
+        holder.mostrarDatos(medico, rolUsuario);
     }
 
     @Override
@@ -60,26 +62,23 @@ public class MedicoAdapter extends RecyclerView.Adapter<MedicoAdapter.MedicoView
             this.binding = binding;
         }
 
-        public void mostrarDatos(Medico medico){
-            binding.tvNombreMedico.setText(medico.getNombres());
-            binding.tvApellidosMedico.setText(medico.getApellidos());
-            binding.tvDniMedico.setText("DNI: " + medico.getDni());
-            binding.tvCmpMedico.setText("CMP: " + medico.getCmp());
-            binding.tvTelefonoMedico.setText("Teléfono: " + medico.getTelefono());
-            binding.tvEstadoMedico.setText("Estado: " + medico.getEstadoMedicoId());
+        public void mostrarDatos(Medico medico, String rolU){
+            binding.tvNombreMedico.setText(medico.getmedico());
+            binding.tvEspecialidadMedico.setText("Especialidad: " + medico.getEspecialidadNombre());
+            binding.tvConsultorioMedico.setText("Consultorio: " + medico.getConsultorio());
+            if(!"ADMINISTRATIVO".equals(rolU)) {
+                binding.tvDNIMedico.setVisibility(View.GONE);
+                binding.tvTelefonoMedico.setVisibility(View.GONE);
+                binding.tvCMPMedico.setVisibility(View.GONE);
 
-            Log.e("ESP IMAGE", medico.getImagenUrl());
-
-            GlideUrl glideUrl = new GlideUrl(
-                    RetrofitClient.URL_API_SERVICE + medico.getImagenUrl(),
-                    new LazyHeaders.Builder()
-                            .addHeader("Authorization", "Bearer " + RetrofitClient.API_TOKEN)
-                            .build()
-            );
-            Glide.with(binding.getRoot().getContext())
-                    .load(glideUrl)
-                    .into(binding.imgMedico);
-
+            }else {
+                binding.tvTelefonoMedico.setVisibility(View.VISIBLE);
+                binding.tvTelefonoMedico.setText("Telefono: " + medico.getTelefono());
+                binding.tvDNIMedico.setVisibility(View.VISIBLE);
+                binding.tvDNIMedico.setText("DNI :" + medico.getDni());
+                binding.tvCMPMedico.setVisibility(View.VISIBLE);
+                binding.tvCMPMedico.setText("CMP: " + medico.getCmp());
+            }
 
         }
 

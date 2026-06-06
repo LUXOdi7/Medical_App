@@ -2,6 +2,7 @@ package com.example.medicalapp.data;
 
 import com.example.medicalapp.model.Cita;
 import com.example.medicalapp.model.EspecialidadOLD;
+import com.example.medicalapp.model.Medico;
 
 import java.util.ArrayList;
 

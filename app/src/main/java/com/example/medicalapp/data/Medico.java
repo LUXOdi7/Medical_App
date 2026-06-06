@@ -4,20 +4,29 @@ import com.google.gson.annotations.SerializedName;
 
 public class Medico {
     private int id;
+    @SerializedName("usuario_id")
     private int usuarioId;
-    private String nombres;
+
+    private String medico;
     private String apellidos;
     private String dni;
     private String cmp;
     private String telefono;
     private String consultorio;
-    private String estadoMedicoId;
-    @SerializedName("imagen_url")
-    private String imagenUrl;
+    @SerializedName("estado_medico_id")
+    private int estadoMedicoId;
+
+    @SerializedName("especialidad_id")
+    private int especialidadId;
+
+    @SerializedName("especialidad")
+    private String especialidadNombre;
 
     public int getId() {
         return id;
     }
+
+
 
     public void setId(int id) {
         this.id = id;
@@ -31,12 +40,12 @@ public class Medico {
         this.usuarioId = usuarioId;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getmedico() {
+        return medico;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setmedico(String nombres) {
+        this.medico = nombres;
     }
 
     public String getApellidos() {
@@ -79,19 +88,27 @@ public class Medico {
         this.consultorio = consultorio;
     }
 
-    public String getEstadoMedicoId() {
+    public int getEstadoMedicoId() {
         return estadoMedicoId;
     }
 
-    public void setEstadoMedicoId(String estadoMedicoId) {
+    public void setEstadoMedicoId(int estadoMedicoId) {
         this.estadoMedicoId = estadoMedicoId;
     }
 
-    public String getImagenUrl() {
-        return imagenUrl;
+    public int getEspecialidadId() {
+        return especialidadId;
     }
 
-    public void setImagenUrl(String imagenUrl) {
-        this.imagenUrl = imagenUrl;
+    public void setEspecialidadId(int especialidadId) {
+        this.especialidadId = especialidadId;
+    }
+
+    public String getEspecialidadNombre() {
+        return especialidadNombre;
+    }
+
+    public void setEspecialidadNombre(String especialidadNombre) {
+        this.especialidadNombre = especialidadNombre;
     }
 }

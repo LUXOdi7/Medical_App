@@ -11,17 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.example.medicalapp.data.Medico;
 import com.example.medicalapp.databinding.FragmentRegistrarCitaBinding;
 import com.example.medicalapp.data.DatosClinica;
 import com.example.medicalapp.model.EspecialidadOLD;
+import com.example.medicalapp.model.Medico;
 
 import java.util.ArrayList;
 
 public class RegistrarCitaFragment extends Fragment {
 
     FragmentRegistrarCitaBinding binding;
-    ArrayList<Medico> listaMedicos;
+    ArrayList<com.example.medicalapp.model.Medico> listaMedicos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,8 +33,8 @@ public class RegistrarCitaFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Cargar las especialidades y medicos
-        //DatosClinica.cargarDatosInicialesEspecialidad();
-        //DatosClinica.cargarDatosInicialesMedicos();
+        DatosClinica.cargarDatosInicialesEspecialidad();
+        DatosClinica.cargarDatosInicialesMedicos();
         // Cargar en el Autocompleted de Especialidades
         cargarEspecialidades();
 
@@ -55,7 +55,7 @@ public class RegistrarCitaFragment extends Fragment {
 
     }
 
-    private void cargarMedicos(ArrayList<Medico> nuevaLista) {
+    private void cargarMedicos(ArrayList<com.example.medicalapp.model.Medico> nuevaLista) {
         ArrayAdapter<Medico> adapter = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_dropdown_item_1line,

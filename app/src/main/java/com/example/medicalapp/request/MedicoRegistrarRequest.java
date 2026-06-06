@@ -3,43 +3,44 @@ package com.example.medicalapp.request;
 import com.google.gson.annotations.SerializedName;
 
 public class MedicoRegistrarRequest {
-    @SerializedName("usuario_id")
-    private int usuarioId;
-    @SerializedName("nombres")
+    private String email;
+    private String password;
     private String nombres;
-    @SerializedName("apellidos")
     private String apellidos;
-    @SerializedName("dni")
     private String dni;
-    @SerializedName("cmp")
     private String cmp;
-    @SerializedName("telefono")
     private String telefono;
-    @SerializedName("consultorio")
     private String consultorio;
-    @SerializedName("estado_medico_id")
-    private String estadoMedicoId;
 
-    public MedicoRegistrarRequest() {
-    }
+    @SerializedName("especialidad_id")
+    private int especialidadId;
 
-    public MedicoRegistrarRequest(int usuarioId, String nombres, String apellidos, String dni, String cmp, String telefono, String consultorio, String estadoMedicoId) {
-        this.usuarioId = usuarioId;
+    public MedicoRegistrarRequest(String email, String password, String nombres, String apellidos, String dni, String cmp, String telefono, String consultorio, int especialidadId) {
+        this.email = email;
+        this.password = password;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.dni = dni;
         this.cmp = cmp;
         this.telefono = telefono;
         this.consultorio = consultorio;
-        this.estadoMedicoId = estadoMedicoId;
+        this.especialidadId = especialidadId;
     }
 
-    public int getUsuarioId() {
-        return usuarioId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNombres() {
@@ -90,11 +91,11 @@ public class MedicoRegistrarRequest {
         this.consultorio = consultorio;
     }
 
-    public String getEstadoMedicoId() {
-        return estadoMedicoId;
+    public int getEspecialidadId() {
+        return especialidadId;
     }
 
-    public void setEstadoMedicoId(String estadoMedicoId) {
-        this.estadoMedicoId = estadoMedicoId;
+    public void setEspecialidadId(int especialidadId) {
+        this.especialidadId = especialidadId;
     }
 }

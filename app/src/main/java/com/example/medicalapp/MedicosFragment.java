@@ -13,17 +13,29 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.example.medicalapp.adapter.MedicoAdapter;
+import com.example.medicalapp.data.Especialidad;
+import com.example.medicalapp.data.Login;
 import com.example.medicalapp.data.Medico;
 import com.example.medicalapp.databinding.FragmentMedicosBinding;
 import com.example.medicalapp.data.DatosClinica;
 import com.example.medicalapp.model.EspecialidadOLD;
+import com.example.medicalapp.response.EspecialidadListadoResponse;
+import com.example.medicalapp.response.MedicoPorEspecialidadListadoResponse;
+import com.example.medicalapp.retrofit.ApiService;
+import com.example.medicalapp.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MedicosFragment extends Fragment {
 
     FragmentMedicosBinding binding;
     ArrayList<Medico> listaMedicos = new ArrayList<>();
+    ArrayList<Especialidad> listaEspecialidades = new ArrayList<>();
     MedicoAdapter medicoAdapter;
 
     @Override
@@ -37,58 +49,91 @@ public class MedicosFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Cargar las especialidades y médicos
-        DatosClinica.cargarDatosInicialesEspecialidad();
-        DatosClinica.cargarDatosInicialesMedicos();
-
-        //Cargar las especialidades en el AutocompleteTextView
-        cargarEspecialidades();
-
-        //Instanciar el arrayList de médicos por especialidad
-        listaMedicos = new ArrayList<>();
-
-        //Instanciar el adaptador
-        medicoAdapter = new MedicoAdapter(listaMedicos);
-
-        //COnfigurar el recyclerView
+        String rol = Login.DATOS_SESION.getRol();
+        medicoAdapter = new MedicoAdapter(listaMedicos, rol);
         binding.rvMedicos.setLayoutManager(new LinearLayoutManager(requireContext()));
-
-        //Asignar el adaptador al recyclerView
         binding.rvMedicos.setAdapter(medicoAdapter);
+
+        leerEspecialidades();
 
         //Al seleccionar un item (especialidad) del AutoCompleteText se debe mostrar los médicos pertenecientes a dicha especialidad
         binding.actvEspecialidad.setOnItemClickListener((parent, view1, position, id) -> {
-            String especialidadSeleccionada = binding.actvEspecialidad.getText().toString().trim();
-            filtrarMedicosPorEspecialidad(especialidadSeleccionada);
+            Especialidad especialidadSeleccionada = (Especialidad) parent.getItemAtPosition(position);
+            int idEspecialidad = especialidadSeleccionada.getId();
+            filtrarMedicosPorEspecialidad(idEspecialidad);
         });
 
-        //Seleccionar de manera automática la primera especialidad
-        if (! DatosClinica.listaEspecialidades.isEmpty()){
-            String especialidad = DatosClinica.listaEspecialidades.get(0).getNombre();
-            binding.actvEspecialidad.setText(especialidad, false);
-            filtrarMedicosPorEspecialidad(especialidad);
+        if (!"ADMINISTRATIVO".equals(rol)) {
+            binding.fabAgregarMedico.setVisibility(View.GONE);
+        } else {
+            binding.fabAgregarMedico.setOnClickListener(v -> {
+                AgregarMedicoDialog dialog = new AgregarMedicoDialog();
+                dialog.show(getParentFragmentManager(), "AgregarMedicoDialog");
+            });
         }
-
     }
 
-    private void filtrarMedicosPorEspecialidad(String especialidadSeleccionada) {
-        //Limpiar el arrayList
-        listaMedicos.clear();
-        //Obtener los medicos que pertenecen a la especialidad seleccionada
-        listaMedicos = DatosClinica.obtenerListaMedicosPorEspecialidad(especialidadSeleccionada);
+    private void filtrarMedicosPorEspecialidad(int especialidadSeleccionada) {
+
+        ApiService apiService = RetrofitClient.createService();
+        Call<MedicoPorEspecialidadListadoResponse> call = apiService.getMedicosPorEspecialidad(especialidadSeleccionada);
+
+        call.enqueue(new Callback<MedicoPorEspecialidadListadoResponse>() {
+            @Override
+            public void onResponse(Call<MedicoPorEspecialidadListadoResponse> call, Response<MedicoPorEspecialidadListadoResponse> response) {
+                if (response.isSuccessful()) {
+                    //Limpiar el arrayList
+                    listaMedicos.clear();
+                    listaMedicos.addAll(Arrays.asList(response.body().getData()));
+                    medicoAdapter.actualizarLista(listaMedicos);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MedicoPorEspecialidadListadoResponse> call, Throwable t) {
+
+            }
+        });
+
+
         //Enviar al adaptador a la lista de mpedicos de la especialidad seleccionada
         medicoAdapter.actualizarLista(listaMedicos);
 
     }
 
-    private void cargarEspecialidades() {
-        ArrayAdapter<EspecialidadOLD> adapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_dropdown_item_1line,
-                DatosClinica.listaEspecialidades
-        );
-        binding.actvEspecialidad.setAdapter(adapter);
+    private void leerEspecialidades() {
+        ApiService apiService = RetrofitClient.createService();
+        Call<EspecialidadListadoResponse> call= apiService.getEspecialidades();
+        call.enqueue(new Callback<EspecialidadListadoResponse>() {
+            @Override
+            public void onResponse(Call<EspecialidadListadoResponse> call, Response<EspecialidadListadoResponse> response) {
+                if (response.isSuccessful()) {
+                    listaEspecialidades.clear();
+                    //Cargar las especialidades que vienen del API REST
+                    listaEspecialidades.addAll(Arrays.asList(response.body().getData()));
+                    //Refrescar el listado del adapter
 
+                    ArrayAdapter<Especialidad> adapter = new ArrayAdapter<>(
+                            requireContext(),
+                            android.R.layout.simple_dropdown_item_1line,
+                            listaEspecialidades
+                    );
+                    binding.actvEspecialidad.setAdapter(adapter);
+
+                    if (!listaEspecialidades.isEmpty()) {
+                        Especialidad primeraEspecialidad = listaEspecialidades.get(0);
+                        binding.actvEspecialidad.setText(primeraEspecialidad.getNombre(), false);
+                        filtrarMedicosPorEspecialidad(primeraEspecialidad.getId());
+                    }
+
+                }
+            }
+            @Override
+            public void onFailure(Call<EspecialidadListadoResponse> call, Throwable t) {
+                //Manejar el error
+
+            }
+        });
     }
 
     @Override
