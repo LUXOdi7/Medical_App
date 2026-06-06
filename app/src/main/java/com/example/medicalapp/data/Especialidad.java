@@ -40,4 +40,9 @@ public class Especialidad {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    @Override
+    public String toString() {
+        return nombre; // Esto permite que el ArrayAdapter muestre el nombre en el dropdown
+    }
 }

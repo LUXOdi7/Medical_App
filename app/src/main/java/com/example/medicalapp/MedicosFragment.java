@@ -12,13 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.example.medicalapp.adapter.EspecialidadAdapter;
 import com.example.medicalapp.adapter.MedicoAdapter;
 import com.example.medicalapp.data.Especialidad;
 import com.example.medicalapp.data.Login;
 import com.example.medicalapp.data.Medico;
 import com.example.medicalapp.databinding.FragmentMedicosBinding;
-import com.example.medicalapp.data.DatosClinica;
-import com.example.medicalapp.model.EspecialidadOLD;
 import com.example.medicalapp.response.EspecialidadListadoResponse;
 import com.example.medicalapp.response.MedicoPorEspecialidadListadoResponse;
 import com.example.medicalapp.retrofit.ApiService;
@@ -37,6 +36,7 @@ public class MedicosFragment extends Fragment {
     ArrayList<Medico> listaMedicos = new ArrayList<>();
     ArrayList<Especialidad> listaEspecialidades = new ArrayList<>();
     MedicoAdapter medicoAdapter;
+    EspecialidadAdapter especialidadAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

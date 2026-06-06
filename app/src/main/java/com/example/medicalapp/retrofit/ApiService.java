@@ -34,7 +34,7 @@ public interface ApiService {
     @GET("medicos/especialidad/{id}")
     Call<MedicoPorEspecialidadListadoResponse> getMedicosPorEspecialidad(@Path("id") int id);
 
-    @POST("medicos/")
+    @POST("medicos")
     Call<MedicoRegistrarResponse> registrarMedico(@Body MedicoRegistrarRequest request);
 
 //    @GET("agricultor/foto/{id}")
