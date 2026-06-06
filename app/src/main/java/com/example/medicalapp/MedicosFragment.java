@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.example.medicalapp.adapter.MedicoAdapter;
+import com.example.medicalapp.data.Medico;
 import com.example.medicalapp.databinding.FragmentMedicosBinding;
 import com.example.medicalapp.data.DatosClinica;
 import com.example.medicalapp.model.EspecialidadOLD;

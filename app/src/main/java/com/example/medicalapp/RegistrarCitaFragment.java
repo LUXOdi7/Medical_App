@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.example.medicalapp.data.Medico;
 import com.example.medicalapp.databinding.FragmentRegistrarCitaBinding;
 import com.example.medicalapp.data.DatosClinica;
 import com.example.medicalapp.model.EspecialidadOLD;
@@ -32,8 +33,8 @@ public class RegistrarCitaFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Cargar las especialidades y medicos
-        DatosClinica.cargarDatosInicialesEspecialidad();
-        DatosClinica.cargarDatosInicialesMedicos();
+        //DatosClinica.cargarDatosInicialesEspecialidad();
+        //DatosClinica.cargarDatosInicialesMedicos();
         // Cargar en el Autocompleted de Especialidades
         cargarEspecialidades();
 
