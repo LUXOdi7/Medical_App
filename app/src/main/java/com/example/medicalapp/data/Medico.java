@@ -6,7 +6,8 @@ public class Medico {
     private int id;
     @SerializedName("usuario_id")
     private int usuarioId;
-
+    @SerializedName("imagen_url")
+    private String imagenUrl;
     private String medico;
     private String apellidos;
     private String dni;
@@ -27,6 +28,21 @@ public class Medico {
     }
 
 
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
+
+    public String getMedico() {
+        return medico;
+    }
+
+    public void setMedico(String medico) {
+        this.medico = medico;
+    }
 
     public void setId(int id) {
         this.id = id;

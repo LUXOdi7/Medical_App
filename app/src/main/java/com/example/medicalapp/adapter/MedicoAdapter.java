@@ -66,6 +66,14 @@ public class MedicoAdapter extends RecyclerView.Adapter<MedicoAdapter.MedicoView
             binding.tvNombreMedico.setText(medico.getmedico());
             binding.tvEspecialidadMedico.setText("Especialidad: " + medico.getEspecialidadNombre());
             binding.tvConsultorioMedico.setText("Consultorio: " + medico.getConsultorio());
+            Log.e("ESP IMAGEN MEDICO", RetrofitClient.URL_API_SERVICE+medico.getImagenUrl());
+
+            GlideUrl glideUrl = new GlideUrl(
+                    RetrofitClient.URL_API_SERVICE+ medico.getImagenUrl(),
+                    new LazyHeaders.Builder()
+                            .addHeader("Authorization", "Bearer " + RetrofitClient.API_TOKEN)
+                            .build()
+            );
             if(!"ADMINISTRATIVO".equals(rolU)) {
                 binding.tvDNIMedico.setVisibility(View.GONE);
                 binding.tvTelefonoMedico.setVisibility(View.GONE);
