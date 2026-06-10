@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_horarios_disponibles"
+        android:title="Horarios disponibles"
+        android:icon="@drawable/ic_calendar_month"/>
+    <item
+        android:id="@+id/menu_citas_registradas"
+        android:title="Citas registradas"
+        android:icon="@drawable/ic_calendar_add"/>
+    <item
+        android:id="@+id/menu_historial_citas"
+        android:title="Historial citas"
+        android:icon="@drawable/ic_history"/>
+</menu>

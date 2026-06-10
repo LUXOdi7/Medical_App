@@ -22,6 +22,9 @@ public class RegistrarCitaFragment extends Fragment {
 
     FragmentRegistrarCitaBinding binding;
     ArrayList<com.example.medicalapp.model.Medico> listaMedicos;
+    public RegistrarCitaFragment() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,50 +35,7 @@ public class RegistrarCitaFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Cargar las especialidades y medicos
-        DatosClinica.cargarDatosInicialesEspecialidad();
-        DatosClinica.cargarDatosInicialesMedicos();
-        // Cargar en el Autocompleted de Especialidades
-        cargarEspecialidades();
-
-        binding.actvEspecialidadRegistro.setOnItemClickListener((parent, view1, position, id) -> {
-            String especialidadSeleccionada = binding.actvEspecialidadRegistro.getText().toString().trim();
-            filtrarMedicosPorEspecialidad(especialidadSeleccionada);
-        });
-
     }
-
-    private void filtrarMedicosPorEspecialidad(String especialidadSeleccionada) {
-        if (listaMedicos != null) {
-            listaMedicos.clear();
-        }
-        //Obtener los médicos que pertenezcan a la especialidad seleccionada
-        listaMedicos = DatosClinica.obtenerListaMedicosPorEspecialidad(especialidadSeleccionada);
-        cargarMedicos(listaMedicos);
-
-    }
-
-    private void cargarMedicos(ArrayList<com.example.medicalapp.model.Medico> nuevaLista) {
-        ArrayAdapter<Medico> adapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_dropdown_item_1line,
-                listaMedicos
-        );
-        binding.actvMedicoRegistro.setAdapter(adapter);
-    }
-
-
-    private void cargarEspecialidades() {
-        ArrayAdapter<EspecialidadOLD> adapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_dropdown_item_1line,
-                DatosClinica.listaEspecialidades
-        );
-        binding.actvEspecialidadRegistro.setAdapter(adapter);
-
-    }
-
-
 
     @Override
     public void onDestroyView() {
