@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class MedicoAdapter extends RecyclerView.Adapter<MedicoAdapter.MedicoViewHolder> {
 
-    private ArrayList<Medico> listaMedicos;
+    private ArrayList<Medico> listaMedicos = new ArrayList<>();
     private String rolUsuario;
     public MedicoAdapter(ArrayList<Medico> listaMedicos, String rolUsuario) {
         this.listaMedicos = listaMedicos;
@@ -74,6 +74,9 @@ public class MedicoAdapter extends RecyclerView.Adapter<MedicoAdapter.MedicoView
                             .addHeader("Authorization", "Bearer " + RetrofitClient.API_TOKEN)
                             .build()
             );
+            Glide.with(binding.getRoot().getContext())
+                    .load(glideUrl)
+                    .into(binding.imgMedico);
             if(!"ADMINISTRATIVO".equals(rolU)) {
                 binding.tvDNIMedico.setVisibility(View.GONE);
                 binding.tvTelefonoMedico.setVisibility(View.GONE);

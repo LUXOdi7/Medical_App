@@ -34,9 +34,9 @@ public class RegistrarCitaFragment extends Fragment {
         binding = FragmentRegistrarCitaBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
-        binding.bnvMenuOpcionesCitas.setOnItemSelectedListener(MenuItem ->{
-            return RegistrarCitaFragment.this.onNavigationItemSelected(MenuItem);
-        });
+//        binding.bnvMenuOpcionesCitas.setOnItemSelectedListener(MenuItem ->{
+//            return RegistrarCitaFragment.this.onNavigationItemSelected(MenuItem);
+//        });
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
