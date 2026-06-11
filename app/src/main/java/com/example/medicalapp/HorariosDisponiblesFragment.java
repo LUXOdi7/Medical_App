@@ -7,58 +7,72 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HorariosDisponiblesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.medicalapp.data.Especialidad;
+import com.example.medicalapp.databinding.FragmentHorariosDisponiblesBinding;
+import com.example.medicalapp.response.EspecialidadListadoResponse;
+import com.example.medicalapp.retrofit.ApiService;
+import com.example.medicalapp.retrofit.RetrofitClient;
+import com.example.medicalapp.util.Helper;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
 public class HorariosDisponiblesFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    FragmentHorariosDisponiblesBinding binding;
+    ArrayList<Especialidad> lista = new ArrayList<>();
     public HorariosDisponiblesFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HorariosDisponiblesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HorariosDisponiblesFragment newInstance(String param1, String param2) {
-        HorariosDisponiblesFragment fragment = new HorariosDisponiblesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_horarios_disponibles, container, false);
+
+        binding = FragmentHorariosDisponiblesBinding.inflate(inflater, container, false);
+
+        //Cargar las especialidades en el AutoComplete text view
+        cargarEspecialidades();
+
+        return binding.getRoot();
     }
+
+    private void cargarEspecialidades() {
+        ApiService apiService = RetrofitClient.createService();
+        Call<EspecialidadListadoResponse> call = apiService.getEspecialidades();
+
+        call.enqueue(new Callback<EspecialidadListadoResponse>() {
+            @Override
+            public void onResponse(Call<EspecialidadListadoResponse> call, Response<EspecialidadListadoResponse> response) {
+                if(response.isSuccessful() && response.body().isStatus()){
+                    //Limpiar las especialidades cargadas en el Arraylist
+                    lista.clear();
+                    //Cargar las especialidades que vienen del API REST(endpoint)
+                    lista.addAll(Arrays.asList(response.body().getData()));
+                    //Generar el arrayadapter
+                    ArrayAdapter<Especialidad> adapter = new ArrayAdapter<>(
+                            requireContext(),
+                            android.R.layout.simple_dropdown_item_1line,
+                            lista
+                    );
+
+                    //Setear el arrayAdapter al autoCompleteTextView
+                    binding.actvEspecialidad.setAdapter(adapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<EspecialidadListadoResponse> call, Throwable t) {
+                Helper.mensajeError(requireContext(), "Error", t.getMessage());
+            }
+        });
+    }
+
 }
