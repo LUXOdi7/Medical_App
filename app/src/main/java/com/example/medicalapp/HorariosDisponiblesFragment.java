@@ -16,6 +16,7 @@ import com.example.medicalapp.response.EspecialidadListadoResponse;
 import com.example.medicalapp.retrofit.ApiService;
 import com.example.medicalapp.retrofit.RetrofitClient;
 import com.example.medicalapp.util.Helper;
+import com.example.medicalapp.util.Pickers;
 import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
@@ -55,7 +56,23 @@ public class HorariosDisponiblesFragment extends Fragment {
         gestionarTachadoX(binding.chipDesde);
         gestionarTachadoX(binding.chipHasta);
 
+        //Gestionar la fecha al hacer click en el centro del chip
+        gestionarFechaChip(binding.chipDesde);
+        gestionarFechaChip(binding.chipHasta);
+
         return binding.getRoot();
+    }
+
+    private void gestionarFechaChip(Chip chip) {
+        chip.setOnClickListener(v -> {
+            int currentFlags = chip.getPaintFlags();
+            final int STRIKE_FLAGS = Paint.STRIKE_THRU_TEXT_FLAG;
+            if ((currentFlags & STRIKE_FLAGS) > 0) { //Si el texto ya se encuentra tachado
+                chip.setPaintFlags(currentFlags & ~STRIKE_FLAGS);//Quitando el tachado
+            }else{
+                Pickers.
+            }
+        });
     }
 
     private void gestionarTachadoX(Chip chip) {
