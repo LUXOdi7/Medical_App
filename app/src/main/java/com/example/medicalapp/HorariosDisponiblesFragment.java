@@ -70,7 +70,8 @@ public class HorariosDisponiblesFragment extends Fragment {
             if ((currentFlags & STRIKE_FLAGS) > 0) { //Si el texto ya se encuentra tachado
                 chip.setPaintFlags(currentFlags & ~STRIKE_FLAGS);//Quitando el tachado
             }else{
-                Pickers.
+                //Mostrar el calendario para que permita seleccionar la fecha actual o posterior
+                Pickers.obtenerFecha(requireContext(), chip, "posterior");
             }
         });
     }
