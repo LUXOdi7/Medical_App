@@ -51,7 +51,7 @@
                     app:chipIconVisible="true"
                     app:chipIcon="@drawable/ic_date_range"
                     android:textSize="12sp"
-                    android:text="11/06/2026"/>
+                    android:text="10/06/2026"/>
 
                 <com.google.android.material.chip.Chip
                     android:layout_marginLeft="5dp"
@@ -62,7 +62,7 @@
                     app:chipIconVisible="true"
                     app:chipIcon="@drawable/ic_date_range"
                     android:textSize="12sp"
-                    android:text="25/06/2026"/>
+                    android:text="10/06/2026"/>
                 <com.google.android.material.chip.Chip
                     android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"

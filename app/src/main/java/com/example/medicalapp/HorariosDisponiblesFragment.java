@@ -42,6 +42,14 @@ public class HorariosDisponiblesFragment extends Fragment {
         //Cargar las especialidades en el AutoComplete text view
         cargarEspecialidades();
 
+        //Configurar los chips (desativar los check)
+        binding.chipDesde.setCheckable(false);
+        binding.chipHasta.setCheckable(false);
+        //Setear la fecha actual
+        binding.chipDesde.setText(Helper.obtenerFechaActual());
+        binding.chipHasta.setText(Helper.obtenerFechaActual());
+
+
         return binding.getRoot();
     }
 
