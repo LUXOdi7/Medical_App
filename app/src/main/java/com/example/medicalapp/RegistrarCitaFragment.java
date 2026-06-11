@@ -32,11 +32,15 @@ public class RegistrarCitaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentRegistrarCitaBinding.inflate(inflater, container, false);
-        return binding.getRoot();
 
-//        binding.bnvMenuOpcionesCitas.setOnItemSelectedListener(MenuItem ->{
-//            return RegistrarCitaFragment.this.onNavigationItemSelected(MenuItem);
-//        });
+
+        binding.bnvMenuOpcionesCitas.setOnItemSelectedListener(menuItem -> {
+            return RegistrarCitaFragment.this.onNavigationItemSelected(menuItem);
+        });
+        //Cargar en automàtico el primer fragment (primera opciòn del menù)
+        this.onNavigationItemSelected(binding.bnvMenuOpcionesCitas.getMenu().getItem(0));
+
+        return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
