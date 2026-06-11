@@ -58,6 +58,8 @@ dependencies {
     implementation libs.converter.gson
     //Glide
     implementation libs.glide
+    //Swipe Refresh Layout
+    implementation libs.swiperefreshlayout
 
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
