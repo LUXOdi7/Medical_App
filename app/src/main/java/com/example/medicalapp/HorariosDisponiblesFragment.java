@@ -1,5 +1,6 @@
 package com.example.medicalapp;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import com.example.medicalapp.response.EspecialidadListadoResponse;
 import com.example.medicalapp.retrofit.ApiService;
 import com.example.medicalapp.retrofit.RetrofitClient;
 import com.example.medicalapp.util.Helper;
+import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,12 +47,27 @@ public class HorariosDisponiblesFragment extends Fragment {
         //Configurar los chips (desativar los check)
         binding.chipDesde.setCheckable(false);
         binding.chipHasta.setCheckable(false);
-        //Setear la fecha actual
+        //Setear la fecha actual en los chips de fechas
         binding.chipDesde.setText(Helper.obtenerFechaActual());
         binding.chipHasta.setText(Helper.obtenerFechaActual());
 
+        //Gestionar el click en la "X" de los chips
+        gestionarTachadoX(binding.chipDesde);
+        gestionarTachadoX(binding.chipHasta);
 
         return binding.getRoot();
+    }
+
+    private void gestionarTachadoX(Chip chip) {
+        chip.setOnCloseIconClickListener(v -> {
+            int currentFlags = chip.getPaintFlags();
+            final int STRIKE_FLAGS = Paint.STRIKE_THRU_TEXT_FLAG;
+            if ((currentFlags & STRIKE_FLAGS) > 0) { //Si el texto ya se encuentra tachado
+                chip.setPaintFlags(currentFlags & ~STRIKE_FLAGS);//Quitando el tachado
+            }else{
+                chip.setPaintFlags(currentFlags | STRIKE_FLAGS);//Aplicando el tachado
+            }
+        });
     }
 
     private void cargarEspecialidades() {
